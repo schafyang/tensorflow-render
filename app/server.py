@@ -19,9 +19,9 @@ from starlette.staticfiles import StaticFiles
 #set url
 # export_file_url = 'https://drive.google.com/uc?export=download&id=1ZZ_2JRe39KcgqGu75watpeLOtQGfeDPA'
 model_config_name = 'app/models/model.config'
-model_file_name = 'app/models/best-model.h5'
+model_file_name = 'app/models/best_model.h5'
 
-classes = ['0', '1', '2', '3']
+classes = ['0', '1', '2']
 path = Path(__file__).parent
 img_size = 224
 app = Starlette()
@@ -41,13 +41,13 @@ async def download_file(url, dest):
 async def setup_learner():
     # await download_file(export_file_url, path / export_file_name)
     try:
-        #learn = load_learner(path, export_file_name)        
-        #learn = keras.models.load_model("app/"+export_file_name)
-        #with open(model_config_name, "r") as text_file:
-        #    json_string = text_file.read()
-        #learn = keras.models.model_from_json(json_string)
-        #learn.load_weights(model_file_name)
-        learn=keras.models.load_model(model_file_name)
+        learn = load_learner(path, export_file_name)        
+        learn = keras.models.load_model("app/"+export_file_name)
+        with open(model_config_name, "r") as text_file:
+            json_string = text_file.read()
+        learn = keras.models.model_from_json(json_string)
+        learn.load_weights(model_file_name)
+        
         return learn
     except RuntimeError as e:
         if len(e.args) > 0 and 'CPU-only machine' in e.args[0]:
