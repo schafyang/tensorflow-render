@@ -19,7 +19,7 @@ from starlette.staticfiles import StaticFiles
 #set url
 # export_file_url = 'https://drive.google.com/uc?export=download&id=1ZZ_2JRe39KcgqGu75watpeLOtQGfeDPA'
 model_config_name = 'app/models/model.config'
-model_file_name = 'models/best_model.h5'
+model_file_name = 'app/models/best_model.h5'
 
 classes = ['0', '1', '2']
 path = Path(__file__).parent
